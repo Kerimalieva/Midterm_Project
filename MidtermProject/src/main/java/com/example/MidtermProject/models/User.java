@@ -3,6 +3,8 @@ package com.example.MidtermProject.models;
 import com.example.MidtermProject.models.enums.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.*;
@@ -14,8 +16,10 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true, updatable = false)
+    @Email(message = "Email должен быть корректным")
     private String email;
     private String phoneNumber;
+    @NotEmpty(message = "Имя не может быть пустым")
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
